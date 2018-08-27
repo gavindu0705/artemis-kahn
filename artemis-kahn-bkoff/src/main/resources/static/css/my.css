@@ -1,0 +1,102 @@
+.nav-tabs {
+	padding: 2px 0 0 10px;
+	border-bottom: 1px solid #ddd;
+	display: table;
+	position:relative;
+	width: 99%;
+}
+
+.nav-tabs>li {
+	position: relative;
+	display: block;
+	float: left;
+	margin-bottom: -1px;
+	margin-left: 3px;
+}
+
+
+.nav-tabs>li>a:hover,.nav-tabs>li>a:focus {
+	text-decoration: none;
+	background-color: #fff;
+	color: #105DDD;
+	border-top:1px solid #ddd;
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	
+}
+
+.nav-tabs>li>a {
+	position: relative;
+	display: block;
+	padding: 6px 10px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	font-size:10px;
+}
+
+li.active a {
+	background-color: #fff;
+	border-top:1px solid #ddd;
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	font-weight: bold;
+}
+
+.smenu {
+	padding: 5px 1px 5px 3px;
+}
+
+
+.smenu li{
+	line-height: 1;
+	display: table;
+	font-family: "宋体";
+	padding: 4px 0 5px;
+	width: 99%;
+}
+
+
+.smenu li .cat{
+	float: left;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.smenu li .item a{
+	color: #105ddd;
+	padding: 0 1px 2px 2px;
+	margin: 0 6px;
+	white-space: nowrap;
+	display: block;
+	float: left;
+	font-size: 14px;
+}
+
+.smenu li .item a.check{
+	color: white;
+	background-color: #2F70DB;
+	border-radius: 5px;
+}
+
+.smenu li .item a:hover {
+	color: white;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.res2 .stip{
+	float:left;
+	padding: 3px 0 1px 2px;
+	font-size: 14px;
+}
+
+.res2 .skey{
+	float:right;
+	padding: 0 0 2px 2px;
+}
+
+
+
+
+
+
