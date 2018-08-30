@@ -4,22 +4,31 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.artemis.kahn</groupId>
+    <artifactId>artemis-kahn-dao</artifactId>
+    <version>1.0.0</version>
+
+    <name>artemis-kahn-dao</name>
+
     <parent>
-        <artifactId>artemis-kahn</artifactId>
-        <groupId>com.artemis.kahn</groupId>
-        <version>${kahn.system.version}</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>artemis-kahn-dao</artifactId>
-
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <dependency>
+            <groupId>com.artemis.kahn</groupId>
+            <artifactId>artemis-kahn-base</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.4.6</version>
         </dependency>
-
         <!-- 分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -35,6 +44,25 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
         </dependency>
     </dependencies>
 

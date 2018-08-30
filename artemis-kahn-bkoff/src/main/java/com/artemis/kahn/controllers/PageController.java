@@ -1,10 +1,10 @@
 package com.artemis.kahn.controllers;
 
 
-import com.artemis.kahn.dao.mongo.JobRepo;
-import com.artemis.kahn.dao.mongo.PageRepo;
 import com.artemis.kahn.dao.mongo.entity.Job;
 import com.artemis.kahn.dao.mongo.entity.Page;
+import com.artemis.kahn.dao.mongo.repo.JobDao;
+import com.artemis.kahn.dao.mongo.repo.PageDao;
 import com.artemis.kahn.model.PageModel;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -26,17 +26,17 @@ import java.util.List;
 public class PageController {
 
     @Autowired
-    JobRepo jobRepo;
+    JobDao jobDao;
 
     @Autowired
-    PageRepo pageRepo;
+    PageDao pageDao;
 
     @RequestMapping(value = "/list")
     public Object list(String jobId, ModelMap modelMap) {
-        Job job = jobRepo.findById(new ObjectId(jobId));
+        Job job = jobDao.findById(jobId);
         List<Page> pages = null;
         if (job != null) {
-            pages = pageRepo.find(new Query(Criteria.where("job_id").is(job.getId())));
+            pages = pageDao.findPageByJobId(jobId);
         }
 
         modelMap.put("job", job);
@@ -46,7 +46,7 @@ public class PageController {
 
     @RequestMapping(value = "/create")
     public String create(String jobId, ModelMap modelMap) {
-        Job job = jobRepo.findById(new ObjectId(jobId));
+        Job job = jobDao.findById(jobId);
         modelMap.put("job", job);
         return "/page/create";
     }
@@ -58,9 +58,9 @@ public class PageController {
         page.setStatus(0);
         page.setCreationDate(new Date());
         page.setPatterns(split(model.getPatternStr()));
-        page.setErrTags(split(model.getErrTagStr()));
-        page.setSucTags(split(model.getSucTagStr()));
-        pageRepo.save(page);
+        page.setErrTag(split(model.getErrTagStr()));
+        page.setSucTag(split(model.getSucTagStr()));
+        pageDao.save(page);
         return "redirect:/page/list?jobId=" + model.getJobId();
     }
 

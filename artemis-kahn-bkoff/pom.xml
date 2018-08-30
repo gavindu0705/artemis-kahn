@@ -4,15 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>artemis-kahn</artifactId>
-        <groupId>com.artemis.kahn</groupId>
-        <version>${kahn.system.version}</version>
+		<groupId>com.artemis.kahn</groupId>
+        <artifactId>bkoff</artifactId>
+        <version>1.0.1</version>
     </parent>
 
 
     <groupId>com.artemis.kahn</groupId>
     <artifactId>artemis-kahn-bkoff</artifactId>
-    <version>${kahn.system.version}</version>
+    <version>${parent.version}</version>
     <packaging>jar</packaging>
 
     <name>artemis-kahn-bkoff</name>
@@ -28,13 +28,8 @@
     <dependencies>
         <dependency>
             <groupId>com.artemis.kahn</groupId>
-            <artifactId>artemis-kahn-batch</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.artemis.kahn</groupId>
             <artifactId>artemis-kahn-service</artifactId>
-            <version>${project.parent.version}</version>
+            <version>1.0.0</version>
         </dependency>
 <!--        <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -59,6 +54,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>

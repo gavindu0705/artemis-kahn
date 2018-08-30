@@ -1,103 +1,120 @@
 package com.artemis.kahn.dao.mongo.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import com.artemis.kahn.dao.mongo.persistence.MongoEntity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "page")
-public class Page {
+@Entity(name="page")
+public class Page implements MongoEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3778850527623833755L;
+	private String id;
+	private String jobId;
+	private String name;
+	private long expires;
+	private List<String> patterns;
+	private List<String> errTag;
+	private List<String> sucTag;
+	private int status;
+	private Date creationDate;
 
-    @Id
-    private String id;
 
-    @Field("job_id")
-    private String jobId;
-    private String name;
-    private long expires;
-    private List<String> patterns;
+	@Id
+	@GeneratedValue
+	@Column(name = ID)
+	public String getId() {
+		return id;
+	}
 
-    @Field("err_tags")
-    private List<String> errTags;
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    @Field("suc_tags")
-    private List<String> sucTags;
-    private int status;
+	@Column(name = "job_id")
+	public String getJobId() {
+		return jobId;
+	}
 
-    @Field("c_date")
-    private Date creationDate;
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
 
-    public String getId() {
-        return id;
-    }
+	@Column(name = "name")
+	public String getName() {
+		return name;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getJobId() {
-        return jobId;
-    }
+	@Column(name = "patterns")
+	public List<String> getPatterns() {
+		return patterns;
+	}
 
-    public void setJobId(String jobId) {
-        this.jobId = jobId;
-    }
+	public void setPatterns(List<String> patterns) {
+		this.patterns = patterns;
+	}
 
-    public String getName() {
-        return name;
-    }
+	@Column(name = "c_date")
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 
-    public long getExpires() {
-        return expires;
-    }
+	@Column(name = "expires")
+	public long getExpires() {
+		return expires;
+	}
 
-    public void setExpires(long expires) {
-        this.expires = expires;
-    }
+	public void setExpires(long expires) {
+		this.expires = expires;
+	}
 
-    public List<String> getPatterns() {
-        return patterns;
-    }
+//	@Column(name = "stop_patterns")
+//	public List<String> getStopPatterns() {
+//		return stopPatterns;
+//	}
+//
+//	public void setStopPatterns(List<String> stopPatterns) {
+//		this.stopPatterns = stopPatterns;
+//	}
 
-    public void setPatterns(List<String> patterns) {
-        this.patterns = patterns;
-    }
+	@Column(name = "status")
+	public int getStatus() {
+		return status;
+	}
 
-    public List<String> getErrTags() {
-        return errTags;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public void setErrTags(List<String> errTags) {
-        this.errTags = errTags;
-    }
+	@Column(name = "err_tag")
+	public List<String> getErrTag() {
+		return errTag;
+	}
 
-    public List<String> getSucTags() {
-        return sucTags;
-    }
+	public void setErrTag(List<String> errTag) {
+		this.errTag = errTag;
+	}
 
-    public void setSucTags(List<String> sucTags) {
-        this.sucTags = sucTags;
-    }
+	@Column(name = "suc_tag")
+	public List<String> getSucTag() {
+		return sucTag;
+	}
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public void setSucTag(List<String> sucTag) {
+		this.sucTag = sucTag;
+	}
 }

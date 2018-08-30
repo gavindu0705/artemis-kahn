@@ -1,8 +1,8 @@
 package com.artemis.kahn.controllers;
 
 
-import com.artemis.kahn.dao.mongo.JobRepo;
 import com.artemis.kahn.dao.mongo.entity.Job;
+import com.artemis.kahn.dao.mongo.repo.JobDao;
 import com.artemis.kahn.model.JobModel;
 import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
@@ -20,11 +20,17 @@ import java.util.List;
 public class JobController {
 
     @Autowired
-    JobRepo jobRepo;
+    JobDao jobDao;
+
 
     @RequestMapping(value = "/list")
     public String list(String name, ModelMap modelMap) {
-        List<Job> list = jobRepo.findAll();
+//        Seed seed = new Seed();
+//        seed.setJobId("1111111111111");
+//        seed.setStatus(0);
+//        seed.setCreationDate(new Date());
+//        seedRepo.save(seed);
+        List<Job> list = jobDao.findAll();
         System.out.println(list.size());
         modelMap.put("jobs", list);
         return "/job/list";
@@ -42,7 +48,7 @@ public class JobController {
         job.setStatus(0);
         job.setCreationDate(new Date());
         job.setSessionId(ObjectId.get().toString());
-        jobRepo.save(job);
+        jobDao.save(job);
         System.out.println(job.getId());
         return "/job/create";
     }

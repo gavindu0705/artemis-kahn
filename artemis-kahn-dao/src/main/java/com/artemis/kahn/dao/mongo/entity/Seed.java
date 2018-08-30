@@ -1,28 +1,58 @@
 package com.artemis.kahn.dao.mongo.entity;
 
+import com.artemis.kahn.dao.mongo.persistence.MongoEntity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
-@Document(collection = "seed")
-public class Seed {
-
-    @Id
+@Entity(name = "seed")
+public class Seed implements MongoEntity {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3841523248615228757L;
     private String id;
-
-    @Field("job_id")
     private String jobId;
     private String url;
     private String charset;
     private String params;
+    private boolean isTemplate = false;
     private int status;
-
-    @Field("c_date")
     private Date creationDate;
 
+    public enum StatusEnum {
+        ENABLE(0), //
+        DISABLE(1), //
+        ;
+        private final int status;
+
+        StatusEnum(int status) {
+            this.status = status;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public static StatusEnum parseUrlsStatus(Integer status) {
+            if (status == null) {
+                return null;
+            }
+            for (StatusEnum st : StatusEnum.values()) {
+                if (status == st.getStatus()) {
+                    return st;
+                }
+            }
+            return null;
+        }
+    }
+
+    @Id
+    @GeneratedValue
+    @Column(name = ID)
     public String getId() {
         return id;
     }
@@ -31,14 +61,7 @@ public class Seed {
         this.id = id;
     }
 
-    public String getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(String jobId) {
-        this.jobId = jobId;
-    }
-
+    @Column(name = "url")
     public String getUrl() {
         return url;
     }
@@ -47,14 +70,25 @@ public class Seed {
         this.url = url;
     }
 
-    public String getCharset() {
-        return charset;
+    @Column(name = "job_id")
+    public String getJobId() {
+        return jobId;
     }
 
-    public void setCharset(String charset) {
-        this.charset = charset;
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 
+    @Column(name = "c_date")
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    @Column(name = "params")
     public String getParams() {
         return params;
     }
@@ -63,6 +97,16 @@ public class Seed {
         this.params = params;
     }
 
+    @Column(name = "charset")
+    public String getCharset() {
+        return charset;
+    }
+
+    public void setCharset(String charset) {
+        this.charset = charset;
+    }
+
+    @Column(name = "status")
     public int getStatus() {
         return status;
     }
@@ -71,11 +115,12 @@ public class Seed {
         this.status = status;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    @Column(name = "is_template")
+    public boolean getIsTemplate() {
+        return isTemplate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setIsTemplate(boolean isTemplate) {
+        this.isTemplate = isTemplate;
     }
 }

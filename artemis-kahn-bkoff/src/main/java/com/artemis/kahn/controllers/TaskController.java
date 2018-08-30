@@ -1,11 +1,11 @@
 package com.artemis.kahn.controllers;
 
-import com.artemis.kahn.dao.mongo.JobRepo;
-import com.artemis.kahn.dao.mongo.PageRepo;
-import com.artemis.kahn.dao.mongo.TaskRepo;
 import com.artemis.kahn.dao.mongo.entity.Job;
 import com.artemis.kahn.dao.mongo.entity.Page;
 import com.artemis.kahn.dao.mongo.entity.Task;
+import com.artemis.kahn.dao.mongo.repo.JobDao;
+import com.artemis.kahn.dao.mongo.repo.PageDao;
+import com.artemis.kahn.dao.mongo.repo.TaskDao;
 import com.artemis.kahn.model.TaskModel;
 import com.artemis.kahn.utils.InvokeShell;
 import org.bson.types.ObjectId;
@@ -29,22 +29,22 @@ import java.util.Map;
 public class TaskController {
 
     @Autowired
-    JobRepo jobRepo;
+    JobDao jobDao;
 
     @Autowired
-    PageRepo pageRepo;
+    PageDao pageDao;
 
     @Autowired
-    TaskRepo taskRepo;
+    TaskDao taskDao;
 
 
     @RequestMapping(value = "/list")
     public Object list(String jobId, String pageId, ModelMap modelMap) {
-        Job job = jobRepo.findById(new ObjectId(jobId));
-        Page page = pageRepo.findById(new ObjectId(pageId));
+        Job job = jobDao.findById(jobId);
+        Page page = pageDao.findById(pageId);
         List<Task> tasks = null;
         if (job != null && page != null) {
-            tasks = taskRepo.find(new Query(Criteria.where("job_id").is(jobId).andOperator(Criteria.where("page_id").is(pageId))));
+            tasks = taskDao.findTaskByJobPageId(jobId, pageId);
         }
         modelMap.put("job", job);
         modelMap.put("page", page);
@@ -54,13 +54,13 @@ public class TaskController {
 
     @RequestMapping(value = "/create")
     public Object create(String jobId, String pageId, String taskId, String clazz, ModelMap modelMap) {
-        Job job = jobRepo.findById(new ObjectId(jobId));
-        Page page = pageRepo.findById(new ObjectId(pageId));
+        Job job = jobDao.findById(jobId);
+        Page page = pageDao.findById(pageId);
         modelMap.put("job", job);
         modelMap.put("page", page);
 
         if (taskId != null) {
-            Task task = taskRepo.findById(new ObjectId(taskId));
+            Task task = taskDao.findById(taskId);
             modelMap.put("clazz", task.getClazz());
             modelMap.put("task", task);
         } else {
@@ -75,7 +75,7 @@ public class TaskController {
         Task task = new Task();
         BeanUtils.copyProperties(taskModel, task);
         task.setCreationDate(new Date());
-        taskRepo.save(task);
+        taskDao.save(task);
         return "redirect:/task/list?jobId=" + taskModel.getJobId() + "&pageId=" + taskModel.getPageId();
     }
 
@@ -83,9 +83,9 @@ public class TaskController {
     @ResponseBody
     public Object validateShellAction(String shell) {
         Map<String, String> data = new HashMap<String, String>();
-        if(InvokeShell.precompiler(shell)) {
+        if (InvokeShell.precompiler(shell)) {
             data.put("status", "1");
-        }else {
+        } else {
             data.put("status", "0");
         }
         return data;
