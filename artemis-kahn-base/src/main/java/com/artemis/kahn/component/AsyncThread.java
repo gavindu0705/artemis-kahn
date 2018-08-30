@@ -1,7 +1,7 @@
 package com.artemis.kahn.component;
 
 /**
- * 异步运行线程
+ * 寮傛杩愯绾跨▼
  *
  * @author xiaoyu
  */

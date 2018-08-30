@@ -7,12 +7,9 @@ import com.artemis.kahn.dao.mongo.repo.JobDao;
 import com.artemis.kahn.dao.mongo.repo.PageDao;
 import com.artemis.kahn.dao.mongo.repo.TaskDao;
 import com.artemis.kahn.model.TaskModel;
-import com.artemis.kahn.utils.InvokeShell;
-import org.bson.types.ObjectId;
+import com.artemis.kahn.component.InvokeShell;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,13 +39,13 @@ public class TaskController {
     public Object list(String jobId, String pageId, ModelMap modelMap) {
         Job job = jobDao.findById(jobId);
         Page page = pageDao.findById(pageId);
-        List<Task> tasks = null;
+        List<Task> taskList = null;
         if (job != null && page != null) {
-            tasks = taskDao.findTaskByJobPageId(jobId, pageId);
+            taskList = taskDao.findTaskByJobPageId(jobId, pageId);
         }
         modelMap.put("job", job);
         modelMap.put("page", page);
-        modelMap.put("tasks", tasks);
+        modelMap.put("taskList", taskList);
         return "/task/list";
     }
 
@@ -79,9 +76,16 @@ public class TaskController {
         return "redirect:/task/list?jobId=" + taskModel.getJobId() + "&pageId=" + taskModel.getPageId();
     }
 
+
+    @RequestMapping(value = "/delete")
+    public Object delete(String id, String jobId, String pageId) {
+        this.taskDao.deleteById(id);
+        return "redirect:/task/list?jobId=" + jobId + "&pageId=" + pageId;
+    }
+
     @RequestMapping(value = "/validateShell")
     @ResponseBody
-    public Object validateShellAction(String shell) {
+    public Object validateShell(String shell) {
         Map<String, String> data = new HashMap<String, String>();
         if (InvokeShell.precompiler(shell)) {
             data.put("status", "1");
@@ -89,5 +93,11 @@ public class TaskController {
             data.put("status", "0");
         }
         return data;
+    }
+
+
+    @RequestMapping(value = "/gshell")
+    public Object gshell() {
+        return "/task/gshell";
     }
 }

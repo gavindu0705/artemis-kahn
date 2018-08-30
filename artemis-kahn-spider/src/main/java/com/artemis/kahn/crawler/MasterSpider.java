@@ -4,6 +4,7 @@ import com.artemis.kahn.component.AsyncThread;
 import com.artemis.kahn.service.crawler.NginxProxyImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
@@ -13,6 +14,8 @@ import java.math.BigDecimal;
  * @author xiaoyu
  *
  */
+
+@Component
 public class MasterSpider extends Thread {
 	public static final Logger LOG = LoggerFactory.getLogger(MasterSpider.class);
 
@@ -24,8 +27,8 @@ public class MasterSpider extends Thread {
 			new AsyncThread(STAT_SKIP_SECS * 1000, new AsyncThread.Call() {
 				@Override
 				public void invoke() {
-					double spiderSpeed = roundDouble((double) SpidersThread.M_SUC_INC.get() / (double) STAT_SKIP_SECS);
-					double collectorSpeed = roundDouble((double) GoalCollector.GOALS_COUNT.get() / (double) STAT_SKIP_SECS);
+//					double spiderSpeed = roundDouble((double) SpidersThread.M_SUC_INC.get() / (double) STAT_SKIP_SECS);
+//					double collectorSpeed = roundDouble((double) GoalCollector.GOALS_COUNT.get() / (double) STAT_SKIP_SECS);
 //					LOG.print(
 //							"[{}/{}/{}] {}/{}/{} spider:{}/s collector:{}/s goal:{} harv:{} road:{} us:{} ue:{}",
 //							new Object[] { SpidersThread.SUC_INC.get(), SpidersThread.ERR_INC.get(),

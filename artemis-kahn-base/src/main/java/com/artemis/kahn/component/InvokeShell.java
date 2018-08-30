@@ -1,4 +1,4 @@
-package com.artemis.kahn.utils;
+package com.artemis.kahn.component;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

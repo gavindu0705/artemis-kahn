@@ -7,10 +7,10 @@ import com.artemis.kahn.core.bean.Harvest;
 import java.io.IOException;
 
 /**
- * 抓取实现策略
- * 
+ * 鎶撳彇瀹炵幇绛栫暐
+ *
  * @author duxiaoyu
- * 
+ *
  */
 public interface ProxyPolicy {
 

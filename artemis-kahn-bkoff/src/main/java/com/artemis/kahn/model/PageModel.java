@@ -13,11 +13,11 @@ public class PageModel {
     @NotBlank
     private String name;
 
-    @NotNull
+    private String patterns;
+
     private Long expires;
-    private String patternStr;
-    private String errTagStr;
-    private String sucTagStr;
+    private String errTag;
+    private String sucTag;
 
     public String getId() {
         return id;
@@ -51,27 +51,28 @@ public class PageModel {
         this.expires = expires;
     }
 
-    public String getPatternStr() {
-        return patternStr;
+
+    public String getErrTag() {
+        return errTag;
     }
 
-    public void setPatternStr(String patternStr) {
-        this.patternStr = patternStr;
+    public void setErrTag(String errTag) {
+        this.errTag = errTag;
     }
 
-    public String getErrTagStr() {
-        return errTagStr;
+    public String getSucTag() {
+        return sucTag;
     }
 
-    public void setErrTagStr(String errTagStr) {
-        this.errTagStr = errTagStr;
+    public void setSucTag(String sucTag) {
+        this.sucTag = sucTag;
     }
 
-    public String getSucTagStr() {
-        return sucTagStr;
+    public String getPatterns() {
+        return patterns;
     }
 
-    public void setSucTagStr(String sucTagStr) {
-        this.sucTagStr = sucTagStr;
+    public void setPatterns(String patterns) {
+        this.patterns = patterns;
     }
 }

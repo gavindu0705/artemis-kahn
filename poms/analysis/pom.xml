@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.artemis.kahn</groupId>
+    <artifactId>analysis</artifactId>
+    <packaging>pom</packaging>
+    <version>${kahn.system.version}</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <kahn.system.version>1.0.1</kahn.system.version>
+    </properties>
+    <modules>
+        <module>../../artemis-kahn-base</module>
+        <module>../../artemis-kahn-dao</module>
+        <module>../../artemis-kahn-service</module>
+		<module>../../artemis-kahn-analysis</module>
+    </modules>
+
+
+</project>

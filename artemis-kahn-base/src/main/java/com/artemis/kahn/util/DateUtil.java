@@ -11,7 +11,7 @@ public class DateUtil {
 
 
     /**
-     * °Ñdate truncateµ½ÈÕÆÚÎªÖ¹,È¥µôÊ±·ÖÃë
+     * æŠŠdate truncateåˆ°æ—¥æœŸä¸ºæ­¢,å»æ‰æ—¶åˆ†ç§’
      *
      * @param date
      * @return
@@ -21,7 +21,7 @@ public class DateUtil {
     }
 
     /**
-     * ×ª»¯ÈÕÆÚ³ÉyyyymmddhhmmssµÄString¸ñÊ½
+     * è½¬åŒ–æ—¥æœŸæˆyyyymmddhhmmssçš„Stringæ ¼å¼
      *
      * @param date
      * @return
@@ -31,7 +31,7 @@ public class DateUtil {
     }
 
     /**
-     * ×ª»¯ÈÕÆÚ³ÉyyyymmddhhmmssµÄString¸ñÊ½
+     * è½¬åŒ–æ—¥æœŸæˆyyyymmddhhmmssçš„Stringæ ¼å¼
      *
      * @param date
      * @return

@@ -18,7 +18,7 @@
 			<a href="/job/create?jobId=${job.id}">编辑</a>
 			<a href="/job/urlRoad?jobId=${job.id}&sessionId=${job.sessionId}">追踪</a>
 			<a href="/job/testUrl?jobId=${job.id}" target="_blank">测试</a>
-			<a href="/job/jobSeed?jobId=${job.id}">种子</a>
+			<a href="/seed/list?jobId=${job.id}">种子</a>
 		</div>
 		<hr>
 		<div>
@@ -27,7 +27,7 @@
 		
 		<div style="padding-left:5px; font-size:10px;">
 			>>&nbsp;<a href="/job/stat?jobId=${job.id}&sessionId=${job.sessionId}">${job.name}</a>
-			/&nbsp;<a href="/job/listPage?jobId=${job.id}">${page.name}</a>&nbsp;
+			/&nbsp;<a href="/page/list?jobId=${job.id}">${page.name}</a>&nbsp;
 			/&nbsp;<a href="/task/list?jobId=${job.id}&pageId=${page.id}">任务项</a>&nbsp;
 			<#if task??>
 				/&nbsp;编辑任务
@@ -153,29 +153,27 @@
 			location.href = "/task/create?jobId=${job.id!}&pageId=${page.id!}&clazz=" + $(this).val();
 		})
 
-		<#if clazz! == 'TEXT' || clazz! == 'HTML' || clazz! == 'ATTR' || clazz! == 'LINK' || clazz! == 'SOURCE' || clazz! == 'CUTSOURCE' || clazz! == 'CLICK' || clazz! == 'ATTR_CLICK' || clazz! == 'TEXT_CLICK' || clazz! == 'CUTSOURCE_CLICK'>
-			var editor = CodeMirror.fromTextArea(document.getElementById("shell"), {
-				lineNumbers: true,
-				matchBrackets: true,
-				mode: "text/x-groovy"
-			});
+        var editor = CodeMirror.fromTextArea(document.getElementById("shell"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "text/x-groovy"
+        });
 
-			$("#subBtn").click(function(){
-				$.post(
-					"validateShell",
-					{shell : editor.getValue()},
-					function(data) {
-						if(data.status != "1") {
-							alert("脚本编译错误！无法保存！")
-						}else {
-							$("#mainForm").submit();
-						}
+        $("#subBtn").click(function(){
+            $.post(
+				"validateShell",
+				{shell : editor.getValue()},
+				function(data) {
+					if(data.status != "1") {
+						alert("脚本编译错误！无法保存！")
+					}else {
+						$("#mainForm").submit();
 					}
-				)
+				}
+            )
 
-				return false;
-			})
-		</#if>
+            return false;
+        })
 
 	</script>
 

@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>数据中心-任务处理项</title>
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+	<#include "../common_js.ftl" />
 
 	<script type="text/javascript">
 				
@@ -17,7 +18,7 @@
 			<a href="/job/create?jobId=${job.id}">编辑</a>
 			<a href="/job/urlRoad?jobId=${job.id}&sessionId=${job.sessionId}">追踪</a>
 			<a href="/job/testUrl?jobId=${job.id}" target="_blank">测试</a>
-			<a href="/job/jobSeed?jobId=${job.id}">种子</a>
+			<a href="/seed/list?jobId=${job.id}">种子</a>
 		</div>
 		<hr>
 		<div>
@@ -40,7 +41,7 @@
                     <th>属性</th>
 					<th>操作</th>
 				</tr>
-				<#list tasks as it>
+				<#list taskList as it>
 					<tr class="odd">
 						<td>
 							<a href="/task/create?taskId=${it.id}&jobId=${job.id}&pageId=${page.id}">${it.caption!}</a>

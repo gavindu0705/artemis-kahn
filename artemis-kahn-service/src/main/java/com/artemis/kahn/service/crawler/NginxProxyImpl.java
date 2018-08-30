@@ -37,7 +37,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * ÀûÓÃNGINX ADSL´úÀí·þÎñ
+ * åˆ©ç”¨NGINX ADSLä»£ç†æœåŠ¡
  *
  * @author duxiaoyu
  */
@@ -81,24 +81,24 @@ public class NginxProxyImpl implements ProxyPolicy {
         ProxyKey proxyKey = new ProxyKey(proxy.getDomain(), proxy.getPort());
         long startTime = 0;
         try {
-            //±ê¼Ç¿ªÊ¼Ê¹ÓÃ´úÀí
+            //æ ‡è®°å¼€å§‹ä½¿ç”¨ä»£ç†
             proxyServerService.startUsing(proxyKey, root);
             startTime = System.currentTimeMillis();
             harvest = invokeHttpClient(proxy, goal);
         } catch (Exception e) {
-            if(e instanceof SocketTimeoutException) {
+            if (e instanceof SocketTimeoutException) {
 
-            }else {
+            } else {
                 LOG.error("jobId:" + goal.getJobId() + ",url:" + goal.getUrl(), e);
             }
             harvest = new Harvest(goal.getJobId(), goal.getSessionId(), goal.getUrl(), Harvest.StatusEnum.ERROR.getCode(), proxy.getDomain());
         } finally {
-        	long endTime = System.currentTimeMillis();
+            long endTime = System.currentTimeMillis();
             proxyServerService.finish(proxyKey, root);
             boolean stat = false;
-            if(harvest.getStatusCode() == Harvest.StatusEnum.SUCCESS.getCode() || harvest.getStatusCode() == Harvest.StatusEnum.SERVER_ERROR.getCode()
-            		|| harvest.getStatusCode() == Harvest.StatusEnum.NOTFOUND4.getCode()){
-            	stat = true;
+            if (harvest.getStatusCode() == Harvest.StatusEnum.SUCCESS.getCode() || harvest.getStatusCode() == Harvest.StatusEnum.SERVER_ERROR.getCode()
+                    || harvest.getStatusCode() == Harvest.StatusEnum.NOTFOUND4.getCode()) {
+                stat = true;
             }
 //            saveLog(harvest, proxy, root, startTime, endTime, stat);
         }
@@ -130,7 +130,7 @@ public class NginxProxyImpl implements ProxyPolicy {
 //	}
 
     /**
-     * openConnectionÊµÏÖ
+     * openConnectionå®žçŽ°
      *
      * @param proxy
      * @param goal
@@ -173,15 +173,15 @@ public class NginxProxyImpl implements ProxyPolicy {
                 } else {
                     content = new String(data, charset);
                 }
-                if (content == null || content.indexOf("ÄãµÄ·ÃÎÊ¹ýÓÚÆµ·±") > -1 || content.indexOf("ÄúµÄ·ÃÎÊËÙ¶ÈÌ«¿ìÁË") > -1) {
+                if (content == null || content.indexOf("ä½ çš„è®¿é—®è¿‡äºŽé¢‘ç¹") > -1 || content.indexOf("æ‚¨çš„è®¿é—®é€Ÿåº¦å¤ªå¿«äº†") > -1) {
                     harvest = new Harvest(goal.getJobId(), goal.getSessionId(), goal.getUrl(), Harvest.StatusEnum.ERROR.getCode(), proxy.getDomain());
                 } else {
                     harvest = new Harvest(goal.getJobId(), goal.getSessionId(), goal.getUrl(), connection.getResponseCode(), connection.getContentType(), data, proxy.getDomain(), goal.getReferer());
                 }
-            }else {
+            } else {
                 harvest = new Harvest(goal.getJobId(), goal.getSessionId(), goal.getUrl(), connection.getResponseCode(), proxy.getDomain());
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw e;
         }
 
@@ -190,7 +190,7 @@ public class NginxProxyImpl implements ProxyPolicy {
 
 
     /**
-     * httpClientÊµÏÖ
+     * httpClientå®žçŽ°
      *
      * @param proxy
      * @param goal
@@ -212,8 +212,8 @@ public class NginxProxyImpl implements ProxyPolicy {
             if (StringUtils.isNotBlank(goal.getReferer())) {
                 httpRequest.setHeader("referer", goal.getReferer());
             }
-            if(null != goal.getHeaders() && !goal.getHeaders().isEmpty()){
-                for(String name : goal.getHeaders().keySet()){
+            if (null != goal.getHeaders() && !goal.getHeaders().isEmpty()) {
+                for (String name : goal.getHeaders().keySet()) {
                     httpRequest.setHeader(name, goal.getHeaders().get(name));
                 }
             }
@@ -248,13 +248,13 @@ public class NginxProxyImpl implements ProxyPolicy {
                     }
 
                     Page page = pageService.matchPage(goal.getJobId(), url);
-                    if(page != null && page.getErrTag() != null && page.getErrTag().size() > 0 && containsAnyOf(content, page.getErrTag())) {
+                    if (page != null && page.getErrTag() != null && page.getErrTag().size() > 0 && containsAnyOf(content, page.getErrTag())) {
                         harvest = new Harvest(goal.getJobId(), goal.getSessionId(), goal.getUrl(), Harvest.StatusEnum.ERROR.getCode(), proxy.getDomain(), data);
                         return harvest;
                     }
 
 
-                    if(page != null && page.getSucTag() != null && page.getSucTag().size() > 0 && !containsAllOf(content, page.getSucTag())) {
+                    if (page != null && page.getSucTag() != null && page.getSucTag().size() > 0 && !containsAllOf(content, page.getSucTag())) {
                         harvest = new Harvest(goal.getJobId(), goal.getSessionId(), goal.getUrl(), Harvest.StatusEnum.ERROR.getCode(), proxy.getDomain(), data);
                         return harvest;
                     }
@@ -262,12 +262,12 @@ public class NginxProxyImpl implements ProxyPolicy {
                     harvest = new Harvest(goal.getJobId(), goal.getSessionId(), goal.getUrl(), response.getStatusLine().getStatusCode(), response.getEntity().getContentType().getValue(), data, proxy.getDomain(), goal.getReferer());
                     return harvest;
                 }
-            }else {
+            } else {
                 harvest = new Harvest(goal.getJobId(), goal.getSessionId(), goal.getUrl(), response.getStatusLine().getStatusCode(), proxy.getDomain());
             }
 
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
 
@@ -275,17 +275,17 @@ public class NginxProxyImpl implements ProxyPolicy {
     }
 
     private boolean containsAllOf(String str, List<String> tags) {
-        if(StringUtils.isBlank(str)) {
+        if (StringUtils.isBlank(str)) {
             return false;
         }
 
-        if(tags == null) {
+        if (tags == null) {
             return true;
         }
 
         boolean f = true;
-        for(String t : tags) {
-            if(!str.contains(t)) {
+        for (String t : tags) {
+            if (!str.contains(t)) {
                 f = false;
                 break;
             }
@@ -295,15 +295,15 @@ public class NginxProxyImpl implements ProxyPolicy {
     }
 
     private boolean containsAnyOf(String str, List<String> tags) {
-        if(StringUtils.isBlank(str)) {
+        if (StringUtils.isBlank(str)) {
             return false;
         }
-        if(tags == null) {
+        if (tags == null) {
             return false;
         }
 
-        for(String t : tags) {
-            if(str.contains(t)) {
+        for (String t : tags) {
+            if (str.contains(t)) {
                 return true;
             }
         }
@@ -313,6 +313,7 @@ public class NginxProxyImpl implements ProxyPolicy {
 
 
     public static final Pattern pattern = Pattern.compile("charset=\"?([\\w\\d-]+)\"?;?", Pattern.CASE_INSENSITIVE);
+
     private String matchCharset(String input) {
         if (input == null) {
             return null;

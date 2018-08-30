@@ -8,10 +8,10 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * ×¥È¡³É¹û³ÖÓĞÆ÷
- * 
+ * æŠ“å–æˆæœæŒæœ‰å™¨
+ *
  * @author xiaoyu
- * 
+ *
  */
 public class HarvestHolder {
 	public static final Logger LOG = LoggerFactory.getLogger(HarvestHolder.class);

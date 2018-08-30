@@ -4,11 +4,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>功能示例</title>
-    <link rel="stylesheet" type="text/css" href="${baseUrl}/style/main.css" />
-    <link rel="stylesheet" type="text/css" href="${baseUrl}/codemirror/codemirror.css">
-    <script src="${baseUrl}/codemirror/codemirror.js"></script>
-    <script src="${baseUrl}/codemirror/addon/edit/matchbrackets.js"></script>
-    <script src="${baseUrl}/codemirror/mode/groovy.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/codemirror/codemirror.css">
+    <script src="/static/css/codemirror/codemirror.js"></script>
+    <script src="/static/css/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="/static/css/codemirror/mode/groovy.js"></script>
 
 </head>
 <body>

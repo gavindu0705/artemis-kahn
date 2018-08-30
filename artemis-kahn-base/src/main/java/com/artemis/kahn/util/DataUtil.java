@@ -21,7 +21,7 @@ import java.util.zip.GZIPInputStream;
 public class DataUtil {
 
     /**
-     * È«½Ç×ª°ë½Ç
+     * å…¨è§’è½¬åŠè§’
      *
      * @param input
      * @return
@@ -67,7 +67,7 @@ public class DataUtil {
     }
 
 
-    // ×Ö½ÚÂë×ª»»³É16½øÖÆ×Ö·û´®
+    // å­—èŠ‚ç è½¬æ¢æˆ16è¿›åˆ¶å­—ç¬¦ä¸²
     public static String byte2hex(byte bytes[]) {
         StringBuffer retString = new StringBuffer();
         for (int i = 0; i < bytes.length; ++i) {
@@ -76,7 +76,7 @@ public class DataUtil {
         return retString.toString();
     }
 
-    // ½«16½øÖÆ×Ö·û´®×ª»»³É×Ö½ÚÂë
+    // å°†16è¿›åˆ¶å­—ç¬¦ä¸²è½¬æ¢æˆå­—èŠ‚ç 
     public static byte[] hex2byte(String hex) {
         byte[] bts = new byte[hex.length() / 2];
         for (int i = 0; i < bts.length; i++) {
@@ -117,7 +117,7 @@ public class DataUtil {
     }
 
     /**
-     * ÔËĞĞlinuxÃüÁî
+     * è¿è¡Œlinuxå‘½ä»¤
      *
      * @param cmd
      * @return
@@ -195,7 +195,7 @@ public class DataUtil {
     }
 
     /**
-     * °´±ÈÀı»ìºÏÁ½¸öÊı×é
+     * æŒ‰æ¯”ä¾‹æ··åˆä¸¤ä¸ªæ•°ç»„
      *
      * @param list0
      * @param list1
@@ -230,7 +230,7 @@ public class DataUtil {
     }
 
     /**
-     * ½âÑ¹
+     * è§£å‹
      *
      * @param content
      * @return

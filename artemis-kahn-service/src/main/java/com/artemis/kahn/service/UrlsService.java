@@ -1,6 +1,5 @@
 package com.artemis.kahn.service;
 
-import com.artemis.kahn.component.AsyncThread;
 import com.artemis.kahn.core.bean.Harvest;
 import com.artemis.kahn.dao.mongo.entity.Job;
 import com.artemis.kahn.dao.mongo.entity.Pends;
